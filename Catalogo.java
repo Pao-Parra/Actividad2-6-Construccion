@@ -23,7 +23,7 @@ public class Catalogo {
         return libros.size();
     }
 
-     public void registrarLibro(Libro libro) {
+      /*public void registrarLibro(Libro libro) {
         agregar(libro);
     }
 
@@ -33,6 +33,6 @@ public class Catalogo {
 
     public int totalLibros() {
         return total();
-    }
+    }*/
 
 }

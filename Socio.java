@@ -1,34 +1,25 @@
 package biblioteca;
 
-// EXTRACT CLASS
+// EXTRACT CLASS se creo la clase de Telefono
 
 
-// MOVE FIELD
+// MOVE FIELD para Socio el dato de diasPrestamo se cambio a la clase Prestamo ya que tiene más sentido ahi
 public class Socio {
     private String nombre;
     private String ciudad;
-    private String telefonoCodigoArea;
-    private String telefonoNumero;
-    private int diasPlazoPrestamo;
+    private Telefono telefono; 
 
-    public Socio(String nombre, String ciudad, String telefonoCodigoArea,
-                 String telefonoNumero, int diasPlazoPrestamo) {
+    
+
+    public Socio(String nombre, String ciudad, Telefono telefono) {
         this.nombre = nombre;
         this.ciudad = ciudad;
-        this.telefonoCodigoArea = telefonoCodigoArea;
-        this.telefonoNumero = telefonoNumero;
-        this.diasPlazoPrestamo = diasPlazoPrestamo;
+        this.telefono = telefono;
     }
 
     public String getNombre() { return nombre; }
     public String getCiudad() { return ciudad; }
-    public int getDiasPlazoPrestamo() { return diasPlazoPrestamo; }
+    public String obtenerTelefonoCompleto() { return telefono.obtenerTelefonoCompleto(); }
+    public boolean esTelefonoLocal() { return telefono.esTelefonoLocal(); }
 
-    public String obtenerTelefonoCompleto() {
-        return "(" + telefonoCodigoArea + ") " + telefonoNumero;
-    }
-
-    public boolean esTelefonoLocal() {
-        return telefonoCodigoArea.equals("999");
-    }
 }

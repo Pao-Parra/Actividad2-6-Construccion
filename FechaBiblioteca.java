@@ -6,38 +6,35 @@ import java.util.Date;
 
 
 //se crea la nueva clase FechaBiblioteca por el  metodo de INTRODUCE LOCAL EXTENSION
-public class FechaBiblioteca extends Prestamo{
+public class FechaBiblioteca extends Date{//extiende de Date 
 
-   
-    public  FechaBiblioteca(Libro libro, Socio socio, Date fechaPrestamo, Date fechaDevolucion) {
-      super(libro, socio,  fechaPrestamo, fechaDevolucion);
+    public  FechaBiblioteca(Date fecha) {
+      super(fecha.getTime());
         }
+   
 
-    //Metodos colocados 
+    //Metodos colocados  se cambia la forma de como usarlos
+    //Sumar dias se vuelve mi metodo foraneo.
+    public FechaBiblioteca  sumarDias(int dias){
+        return new FechaBiblioteca(new Date(getTime() + dias * 24L * 60 * 60 * 1000));
+    }
 
-    public static  int diasEntre (Date desde, Date hasta) {
+    public int diasEntre ( Date hasta) {
         double milisPorDia = 24.0 * 60 * 60 * 1000;
-        return (int) Math.round((hasta.getTime() - desde.getTime()) / milisPorDia);
+        return (int) Math.round((hasta.getTime() - getTime()) / milisPorDia);
     }
 
-    public String formatearFecha(Date fecha) {
-        return new SimpleDateFormat("dd/MM/yyyy").format(fecha);
+     public String formatear() {
+        return new SimpleDateFormat("dd/MM/yyyy").format(this);
     }
-
-    public static  boolean esFinDeSemana(Date fecha) {
+   public boolean esFinDeSemana() {
         Calendar calendario = Calendar.getInstance();
-        calendario.setTime(fecha);
+        calendario.setTime(this);
         int dia = calendario.get(Calendar.DAY_OF_WEEK);
         return dia == Calendar.SATURDAY || dia == Calendar.SUNDAY;
     }
 
    
-    public void imprimirFechas(){
-        super.imprimirResumen();
-        System.out.println("Prestado: " + formatearFecha(fechaPrestamo));
-        System.out.println("Vence: " + formatearFecha(calcularFechaVencimiento()));
-        System.out.println("Vence en fin de semana: " + esFinDeSemana(calcularFechaVencimiento()));
-        System.out.println("Devuelto: " + formatearFecha(fechaDevolucion));
-    }
+   
   
 }

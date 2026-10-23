@@ -5,40 +5,44 @@ import java.util.Date;
 public class Prestamo {
     private Libro libro;
     private Socio socio;
-    protected Date fechaPrestamo;
-    protected Date fechaDevolucion;
+    private FechaBiblioteca fechaPrestamo;
+    private FechaBiblioteca fechaDevolucion;
+    private int diasPlazoPrestamo;
     
     public Prestamo(){
 
     }
 
-    public Prestamo(Libro libro, Socio socio, Date fechaPrestamo, Date fechaDevolucion) {
+    public Prestamo(Libro libro, Socio socio, Date fechaPrestamo, Date fechaDevolucion, int diasPlazoPrestamo) {
         this.libro = libro;
         this.socio = socio;
-        this.fechaPrestamo = fechaPrestamo;
-        this.fechaDevolucion = fechaDevolucion;
+        this.fechaPrestamo = new FechaBiblioteca(fechaPrestamo);
+        this.fechaDevolucion = new FechaBiblioteca(fechaDevolucion);
+        this.diasPlazoPrestamo = diasPlazoPrestamo;
     }
 
-    public Libro getLibro() { return libro; }
-    public Socio getSocio() { return socio; }
-    
+    //Aqui se aplica el Hide delegate  con los metodos get y set para que se llame al main directo desde prestamo
+    public String getSocioCiudad() { return socio.getCiudad(); }
+    public String getLibroAutor() { return libro.getAutor(); }
+    public String getSocioTelefono() { return socio.obtenerTelefonoCompleto(); }
+
 
     // INTRODUCE FOREIGN METHOD
-    public Date calcularFechaVencimiento() {
-        return sumarDias(fechaPrestamo, socio.getDiasPlazoPrestamo());
+    public FechaBiblioteca calcularFechaVencimiento() {
+        return fechaPrestamo.sumarDias(diasPlazoPrestamo);
     }
-    //Sumar dias se vuelve mi metodo foraneo.
-    private static Date sumarDias(Date fecha, int dias){
+    //se crea el metodo sumarDias se vuelve mi metodo foraneo, este se va a FechaBiblioteca
+    /*private static Date sumarDias(Date fecha, int dias){
         return new Date(fecha.getTime() + dias * 24L * 60 * 60 * 1000);
-    }
+    }*/
 
     //
     public int calcularDiasRetraso() {
-        return FechaBiblioteca.diasEntre(calcularFechaVencimiento(), fechaDevolucion);
+         return calcularFechaVencimiento().diasEntre(fechaDevolucion);
     }
 
 
-    // MOVE METHOD
+    // MOVE METHOD se translada a otra clase que es Libro ya que usa más cosas de ahi
     /*public double calcularMulta(int diasRetraso) {
         if (diasRetraso <= 0) {
             return 0;
@@ -53,7 +57,7 @@ public class Prestamo {
         return multa;
     }*/
 
-    // INTRODUCE LOCAL EXTENSION
+    // INTRODUCE LOCAL EXTENSION se crea la clase FechaBiblioteca para esta:
     /*private int diasEntre(Date desde, Date hasta) {
         double milisPorDia = 24.0 * 60 * 60 * 1000;
         return (int) Math.round((hasta.getTime() - desde.getTime()) / milisPorDia);
@@ -70,9 +74,12 @@ public class Prestamo {
         return dia == Calendar.SATURDAY || dia == Calendar.SUNDAY;
     }*/
 
-    public void imprimirResumen() {
+      public void imprimirResumen() {
         System.out.println("Libro: " + libro.getTitulo());
         System.out.println("Socio: " + socio.getNombre());    
-               
+        System.out.println("Prestado: " + fechaPrestamo.formatear());
+        System.out.println("Vence: " + calcularFechaVencimiento().formatear());
+        System.out.println("Vence en fin de semana: " + calcularFechaVencimiento().esFinDeSemana());
+        System.out.println("Devuelto: " + fechaDevolucion.formatear());      
     }
 }

@@ -24,7 +24,8 @@ public class Libro {
     public String getCategoria() { return categoria; }
     public double getMultaPorDia() { return multaPorDia; }
     public double getValorReposicion() { return valorReposicion; }
-    //Se mueve el Metodo Calcular Multa
+    
+    
      public double calcularMulta(int diasRetraso) {
         if (diasRetraso <= 0) {
             return 0;
@@ -38,6 +39,7 @@ public class Libro {
         }
         return multa;
     }
-
-
 }
+
+
+
