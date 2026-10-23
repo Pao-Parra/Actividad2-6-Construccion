@@ -8,20 +8,21 @@ public class Main {
     public static void main(String[] args) {
         Catalogo catalogo = new Catalogo();
         Recepcion recepcion = new Recepcion(catalogo);
+        
+        recepcion.getCatalogo().registrarLibro(new Libro("Java Basico", "R. Perez", "978-1-11111-111-1", "NOVEDAD", 5, 300));
+        recepcion.getCatalogo().registrarLibro(new Libro("Estructuras de Datos", "M. Diaz", "978-2-22222-222-2", "NORMAL", 3, 400));
+        System.out.println("Libros registrados: " + recepcion.getCatalogo().totalLibros());
 
-        recepcion.registrarLibro(new Libro("Java Basico", "R. Perez", "978-1-11111-111-1", "NOVEDAD", 5, 300));
-        recepcion.registrarLibro(new Libro("Estructuras de Datos", "M. Diaz", "978-2-22222-222-2", "NORMAL", 3, 400));
-        System.out.println("Libros registrados: " + recepcion.totalLibros());
-
-        Libro libro = recepcion.consultarLibro("java basico");
+        Libro libro = recepcion.getCatalogo().consultarLibro("java basico");
         Socio socio = new Socio("Ana Lopez", "Merida", "999", "1234567", 14);
 
         Date fechaPrestamo = new GregorianCalendar(2026, Calendar.OCTOBER, 1).getTime();
         Date fechaDevolucion = new GregorianCalendar(2026, Calendar.OCTOBER, 22).getTime();
         Prestamo prestamo = new Prestamo(libro, socio, fechaPrestamo, fechaDevolucion);
+        FechaBiblioteca fechaBiblioteca= new FechaBiblioteca(libro, socio, fechaPrestamo, fechaDevolucion);//se crea el objeto de la clase nueva
 
         System.out.println("-----------------------------");
-        prestamo.imprimirResumen();
+        fechaBiblioteca.imprimirFechas();
         System.out.println("-----------------------------");
 
         // HIDE DELEGATE

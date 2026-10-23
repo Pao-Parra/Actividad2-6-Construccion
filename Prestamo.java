@@ -1,14 +1,12 @@
 package biblioteca;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Prestamo {
     private Libro libro;
     private Socio socio;
-    private Date fechaPrestamo;
-    private Date fechaDevolucion;
+    protected Date fechaPrestamo;
+    protected Date fechaDevolucion;
     
     public Prestamo(){
 
@@ -27,12 +25,18 @@ public class Prestamo {
 
     // INTRODUCE FOREIGN METHOD
     public Date calcularFechaVencimiento() {
-        return new Date(fechaPrestamo.getTime() + socio.getDiasPlazoPrestamo() * 24L * 60 * 60 * 1000);
+        return sumarDias(fechaPrestamo, socio.getDiasPlazoPrestamo());
+    }
+    //Sumar dias se vuelve mi metodo foraneo.
+    private static Date sumarDias(Date fecha, int dias){
+        return new Date(fecha.getTime() + dias * 24L * 60 * 60 * 1000);
     }
 
+    //
     public int calcularDiasRetraso() {
-        return diasEntre(calcularFechaVencimiento(), fechaDevolucion);
+        return FechaBiblioteca.diasEntre(calcularFechaVencimiento(), fechaDevolucion);
     }
+
 
     // MOVE METHOD
     /*public double calcularMulta(int diasRetraso) {
@@ -68,8 +72,7 @@ public class Prestamo {
 
     public void imprimirResumen() {
         System.out.println("Libro: " + libro.getTitulo());
-        System.out.println("Socio: " + socio.getNombre());
-          
-        
+        System.out.println("Socio: " + socio.getNombre());    
+               
     }
 }

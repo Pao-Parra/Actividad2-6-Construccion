@@ -8,7 +8,7 @@ public class Recepcion {
         this.catalogo = catalogo;
     }
 
-    public void registrarLibro(Libro libro) {
+    /*public void registrarLibro(Libro libro) {
         catalogo.agregar(libro);
     }
 
@@ -18,5 +18,11 @@ public class Recepcion {
 
     public int totalLibros() {
         return catalogo.total();
+    }*/
+
+    public Catalogo getCatalogo(){
+        return catalogo;
     }
+
+
 }

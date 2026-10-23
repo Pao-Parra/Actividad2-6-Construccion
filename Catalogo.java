@@ -22,4 +22,17 @@ public class Catalogo {
     public int total() {
         return libros.size();
     }
+
+     public void registrarLibro(Libro libro) {
+        agregar(libro);
+    }
+
+    public Libro consultarLibro(String titulo) {
+        return buscarPorTitulo(titulo);
+    }
+
+    public int totalLibros() {
+        return total();
+    }
+
 }
