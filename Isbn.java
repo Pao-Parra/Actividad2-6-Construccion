@@ -1,4 +1,4 @@
-package biblioteca;
+/*/ package biblioteca;
 
 // INLINE CLASS
 public class Isbn {
@@ -12,3 +12,5 @@ public class Isbn {
         return valor;
     }
 }
+/*/ 
+//ISBN SE CAMBIA A LA CLASE DE LIBRO 

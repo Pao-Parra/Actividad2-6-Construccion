@@ -31,7 +31,7 @@ public class Main {
 
         int retraso = prestamo.calcularDiasRetraso();
         System.out.println("Dias de retraso: " + retraso);
-        System.out.println("Multa: $" + prestamo.calcularMulta(retraso));
+        System.out.println("Multa: $" + libro.calcularMulta(retraso));
         System.out.println("ISBN: " + libro.getIsbn());
         System.out.println("Telefono local: " + socio.esTelefonoLocal());
     }

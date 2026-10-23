@@ -9,6 +9,10 @@ public class Prestamo {
     private Socio socio;
     private Date fechaPrestamo;
     private Date fechaDevolucion;
+    
+    public Prestamo(){
+
+    }
 
     public Prestamo(Libro libro, Socio socio, Date fechaPrestamo, Date fechaDevolucion) {
         this.libro = libro;
@@ -19,6 +23,7 @@ public class Prestamo {
 
     public Libro getLibro() { return libro; }
     public Socio getSocio() { return socio; }
+    
 
     // INTRODUCE FOREIGN METHOD
     public Date calcularFechaVencimiento() {
@@ -30,7 +35,7 @@ public class Prestamo {
     }
 
     // MOVE METHOD
-    public double calcularMulta(int diasRetraso) {
+    /*public double calcularMulta(int diasRetraso) {
         if (diasRetraso <= 0) {
             return 0;
         }
@@ -42,10 +47,10 @@ public class Prestamo {
             multa = libro.getValorReposicion();
         }
         return multa;
-    }
+    }*/
 
     // INTRODUCE LOCAL EXTENSION
-    private int diasEntre(Date desde, Date hasta) {
+    /*private int diasEntre(Date desde, Date hasta) {
         double milisPorDia = 24.0 * 60 * 60 * 1000;
         return (int) Math.round((hasta.getTime() - desde.getTime()) / milisPorDia);
     }
@@ -59,14 +64,12 @@ public class Prestamo {
         calendario.setTime(fecha);
         int dia = calendario.get(Calendar.DAY_OF_WEEK);
         return dia == Calendar.SATURDAY || dia == Calendar.SUNDAY;
-    }
+    }*/
 
     public void imprimirResumen() {
         System.out.println("Libro: " + libro.getTitulo());
         System.out.println("Socio: " + socio.getNombre());
-        System.out.println("Prestado: " + formatearFecha(fechaPrestamo));
-        System.out.println("Vence: " + formatearFecha(calcularFechaVencimiento()));
-        System.out.println("Vence en fin de semana: " + esFinDeSemana(calcularFechaVencimiento()));
-        System.out.println("Devuelto: " + formatearFecha(fechaDevolucion));
+          
+        
     }
 }
